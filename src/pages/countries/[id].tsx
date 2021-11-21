@@ -146,7 +146,7 @@ export const getStaticProps = async (props: any) => {
 
 export const getStaticPaths = async () => {
     return {
-        paths: ['/countries/[id]'],
+        paths: [],
         fallback: true,
     };
 };
