@@ -49,7 +49,18 @@ const Countries = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
                 <HeaderImage />
                 <Search onSearch={(query: string) => setSearchValue(query)} />
             </HeaderStyled>
-            { hasError ? <Page404 /> : countries.length > 0 ? <MainStyled> {countries.map((country: Country) => <CountryItem key={country.code} {...country} />)} </MainStyled> : <NotFound/>  }
+            {hasError ? (
+                <Page404 />
+            ) : countries.length > 0 ? (
+                <MainStyled>
+                    {' '}
+                    {countries.map((country: Country) => (
+                        <CountryItem key={country.code} {...country} />
+                    ))}{' '}
+                </MainStyled>
+            ) : (
+                <NotFound />
+            )}
         </>
     );
 };

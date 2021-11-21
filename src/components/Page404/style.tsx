@@ -1,12 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Page404Styled = styled.div`
-  svg{
-      max-width: 400px;
-      width: 60%;
-      margin: 0 auto;
-      display: flex;
-  }
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
 `;
 
 export default Page404Styled;

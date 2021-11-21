@@ -18,8 +18,8 @@ type ImageJson = {
         description: any;
         alt_description: string;
         urls: {
-            full: string,
-            regular: string
+            full: string;
+            regular: string;
         };
         links: {
             self: string;
@@ -49,11 +49,11 @@ class UnsplashData implements ImageRepository {
                     client_id: process.env.UNSPLASH_TOKEN,
                 },
             });
-            return new HttpResponse<Image>(status, statusText, new Image(
-                data.results[0].urls.full,
-                data.results[0].urls.regular,
-                data.results[0].alt_description
-            ));
+            return new HttpResponse<Image>(
+                status,
+                statusText,
+                new Image(data.results[0].urls.full, data.results[0].urls.regular, data.results[0].alt_description)
+            );
         } catch (error) {
             const err = error as AxiosError;
             if (err.response) {
