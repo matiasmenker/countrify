@@ -129,7 +129,7 @@ const CountryDetail = ({ country, image }: { country: Country; image: Image }) =
 
 const getSearchParamCountry = (country: Country) => (country.capital ? country.capital : country.name);
 
-export const getStaticProps = async (props: any) => {
+export const getStaticProps = async (props: { params: { id: string } }) => {
     const countryId = props.params.id;
     const countryUseCase = new CountryUseCase(new RestCountryData());
     const country = await countryUseCase.getByCode(countryId);

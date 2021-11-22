@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { InferGetStaticPropsType } from 'next';
 import styled from 'styled-components';
+import Country from 'core/entities/Country';
+import CountryUseCase from 'core/use-cases/CountryUseCase';
+import RestCountryData from 'data/RestCountryData';
+
 import Search from 'components/Search';
 import CountryItem from 'components/CountryItem';
 import HeaderImage from 'components/HeaderImage';
 import Page404 from 'components/Page404';
 import NotFound from 'components/NotFound';
-import Country from 'core/entities/Country';
-import CountryUseCase from 'core/use-cases/CountryUseCase';
-import RestCountryData from 'data/RestCountryData';
+
 
 const HeaderStyled = styled.div`
     display: flex;
@@ -21,6 +23,10 @@ const HeaderStyled = styled.div`
 `;
 
 const MainStyled = styled.div`
+    @media (max-width: 440px) {
+        grid-template-columns: 100%;
+        padding: 20px;
+    }  
     width: auto;
     max-width: none;
     float: none;
@@ -37,26 +43,30 @@ const MainStyled = styled.div`
     list-style: none;
 `;
 
+
 const Countries = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
     const [searchValue, setSearchValue] = useState('');
     const hasError = props.error;
+
     const countries = searchValue
         ? props.countries.filter((country: Country) => country.name.toLowerCase().includes(searchValue.toLowerCase()))
         : props.countries;
+
+    const handleChange = useCallback((query: string) => setSearchValue(query.toLowerCase()), [])
+
     return (
         <>
             <HeaderStyled>
                 <HeaderImage />
-                <Search onSearch={(query: string) => setSearchValue(query)} />
+                <Search onSearch={handleChange} />
             </HeaderStyled>
             {hasError ? (
                 <Page404 />
-            ) : countries.length > 0 ? (
+            ) : countries && countries.length > 0 ? (
                 <MainStyled>
-                    {' '}
                     {countries.map((country: Country) => (
-                        <CountryItem key={country.code} {...country} />
-                    ))}{' '}
+                        <CountryItem key={country.code} country={country} />
+                    ))}
                 </MainStyled>
             ) : (
                 <NotFound />
