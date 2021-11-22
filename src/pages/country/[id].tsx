@@ -10,14 +10,19 @@ import Country from 'core/entities/Country';
 import Language from 'core/entities/Language';
 import Image from 'core/entities/Image';
 import { BsFillGeoAltFill, BsFillPeopleFill, BsFillMegaphoneFill, BsArrowLeftCircle } from 'react-icons/bs';
+import Page404 from 'components/Page404';
 
 const noImageFound = '/default_bg.jpg';
 
-const CountryDetailStyled = styled.div`
+const CountryDetailStyled = styled.div<{ error: boolean }>`
     width: auto;
     height: 100vh;
     background-position: center;
     background-size: cover;
+    
+    ${props => props.error && `
+        background-color: #7380a2;
+    `}
 
     > span {
         filter: brightness(0.5) !important;
@@ -76,12 +81,13 @@ const CountryDetailStyled = styled.div`
     }
 `;
 
-const CountryDetail = ({ country, image }: { country: Country; image: Image }) => {
+const CountryDetail = ({ country, image, error }: { country: Country; image: Image, error: boolean }) => {
     const router = useRouter();
     if (country) {
         return (
-            <CountryDetailStyled>
-                <NextImage
+            <CountryDetailStyled error>
+                { !error && <NextImage
+                    data-testid="image-country"
                     className='image-country'
                     placeholder='blur'
                     blurDataURL={image && image.preloadUrl ? image.preloadUrl : noImageFound}
@@ -89,36 +95,38 @@ const CountryDetail = ({ country, image }: { country: Country; image: Image }) =
                     objectFit={'cover'}
                     src={image && image.url ? image.url : noImageFound}
                     alt={country.name}
-                />
+                />}
                 <div className='detail-container'>
                     <span onClick={() => router.back()} className='back'>
                         <BsArrowLeftCircle />
                     </span>
                     <div className='detail'>
-                        <div className='name'>
-                            <span>{country.name}</span>
-                        </div>
-                        <div className='sub-detail'>
-                            <BsFillGeoAltFill />
-                            {country.capital ? (
-                                <span className='capital'>
+                        { error ? <Page404 /> : <>
+                            <div className='name'>
+                                <span>{country.name}</span>
+                            </div>
+                            <div className='sub-detail'>
+                                <BsFillGeoAltFill />
+                                {country.capital ? (
+                                    <span className='capital'>
                                     {country.capital}, {country.name}
                                 </span>
-                            ) : (
-                                <span className='capital'>{country.name}</span>
-                            )}
-                            <img className='flag' src={country.flag} alt={country.name} />
-                        </div>
-                        {country.language && (
-                            <div className='sub-detail'>
-                                <BsFillMegaphoneFill />
-                                <span className='language'>{country.language.map((language: Language) => language.name).join()}</span>
+                                ) : (
+                                    <span className='capital'>{country.name}</span>
+                                )}
+                                <img className='flag' src={country.flag} alt={country.name} />
                             </div>
-                        )}
-                        <div className='sub-detail'>
-                            <BsFillPeopleFill />
-                            <span className='population'>{country.population}</span>
-                        </div>
+                            {country.language && (
+                                <div className='sub-detail'>
+                                    <BsFillMegaphoneFill />
+                                    <span className='language'>{country.language.map((language: Language) => language.name).join()}</span>
+                                </div>
+                            )}
+                            <div className='sub-detail'>
+                                <BsFillPeopleFill />
+                                <span className='population'>{country.population}</span>
+                            </div>
+                        </>}
                     </div>
                 </div>
             </CountryDetailStyled>
@@ -140,6 +148,7 @@ export const getStaticProps = async (props: { params: { id: string } }) => {
         props: {
             image: image.isSuccess() ? image.format() : null,
             country: country.isSuccess() ? country.format() : [],
+            error: country.isError()
         },
     };
 };
