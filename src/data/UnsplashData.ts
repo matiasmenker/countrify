@@ -49,10 +49,11 @@ class UnsplashData implements ImageRepository {
                     client_id: process.env.UNSPLASH_TOKEN,
                 },
             });
+            const image = asImage(data);
             return new HttpResponse<Image>(
                 status,
                 statusText,
-                new Image(data.results[0].urls.full, data.results[0].urls.regular, data.results[0].alt_description)
+                image
             );
         } catch (error) {
             const err = error as AxiosError;
@@ -64,5 +65,7 @@ class UnsplashData implements ImageRepository {
         }
     }
 }
+
+const asImage = (data: ImageJson) => new Image(data.results[0].urls.full, data.results[0].urls.regular, data.results[0].alt_description)
 
 export default UnsplashData;

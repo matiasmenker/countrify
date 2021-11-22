@@ -8,8 +8,9 @@ type CountryJson = {
     name: {
         common: string;
         official: string;
+        nativeName: {}
     };
-    tld: [];
+    tld: string[];
     cca2: string;
     ccn3: string;
     cca3: string;
@@ -19,17 +20,17 @@ type CountryJson = {
     unMember: boolean;
     currencies: {};
     idd: {};
-    capital: [string];
-    altSpellings: [];
+    capital: string[];
+    altSpellings: string[];
     region: string;
     subregion: string;
     languages: {
         [key: string]: string;
     };
     translations: {};
-    latlng: [];
-    landlocked: true;
-    borders: [];
+    latlng: number[];
+    landlocked: boolean;
+    borders: string[];
     area: number;
     demonyms: {};
     flag: string;
@@ -40,8 +41,8 @@ type CountryJson = {
     population: number;
     fifa: string;
     car: {};
-    timezones: [];
-    continents: [];
+    timezones: string[];
+    continents: string[];
     flags: {
         png: string;
         svg: string;
@@ -87,7 +88,7 @@ class RestCountryData implements CountryRepository {
     }
 }
 
-const asCountry = (country: CountryJson) => {
+export const asCountry = (country: CountryJson) => {
     return new Country(
         country.name.common,
         country.cca2,
@@ -97,8 +98,7 @@ const asCountry = (country: CountryJson) => {
         country.maps.googleMaps,
         formatPopulation(country.population),
         country.languages ? Object.values(country.languages).map((language: string) => new Language(language)) : null,
-        country.capital ? country.capital[0] : null,
-        null
+        country.capital ? country.capital[0] : null
     );
 };
 
