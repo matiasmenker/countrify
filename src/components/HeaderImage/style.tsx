@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
 const HeaderImageStyled = styled.div`
+    @media (max-width: 440px) {
+        min-height: 300px;
+    }   
     position: relative;
     width: 100%;
     min-height: 400px;
@@ -11,19 +14,18 @@ const HeaderImageStyled = styled.div`
     background-position: bottom;
 
     .header-image-container {
-        @media (min-width: 500px) {
-            top: 50%;
-            transform: translateY(-70%);
-        }
-
         position: absolute;
-        top: 0;
-        -webkit-box-sizing: border-box;
         box-sizing: border-box;
         width: 100%;
         padding: 0 16px;
         color: #fff;
         text-align: center;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
     }
 
     .title {
