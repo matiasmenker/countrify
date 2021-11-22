@@ -10,7 +10,6 @@ class Country {
     readonly population: string;
     readonly language: Language[] | null;
     readonly capital: string | null;
-    readonly image: string | null;
 
     constructor(
         name: string,
@@ -22,7 +21,6 @@ class Country {
         population: string,
         language: Language[] | null,
         capital: string | null,
-        image: string | null
     ) {
         this.name = name;
         this.code = code;
@@ -33,7 +31,6 @@ class Country {
         this.population = population;
         this.language = language;
         this.capital = capital;
-        this.image = image;
     }
 }
 
