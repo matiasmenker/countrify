@@ -3,7 +3,7 @@ import ImageRepository from 'core/repositories/ImageRepository';
 import { ErrorResponseType, HttpResponse } from 'core/entities/Response';
 import axios, { AxiosError } from 'axios';
 
-type ImageJson = {
+export type ImageJson = {
     total: number;
     total_pages: number;
     results: {
@@ -15,7 +15,7 @@ type ImageJson = {
         height: number;
         color: string;
         blur_hash: string;
-        description: any;
+        description: string;
         alt_description: string;
         urls: {
             full: string;
@@ -33,8 +33,8 @@ type ImageJson = {
         current_user_collections: [];
         sponsorship: boolean;
         topic_submissions: {};
-        user: [];
-        tags: [];
+        user: {};
+        tags:[];
     }[];
 };
 
@@ -66,6 +66,6 @@ class UnsplashData implements ImageRepository {
     }
 }
 
-const asImage = (data: ImageJson) => new Image(data.results[0].urls.full, data.results[0].urls.regular, data.results[0].alt_description)
+export const asImage = (data: ImageJson) => new Image(data.results[0].urls.full, data.results[0].urls.regular, data.results[0].alt_description)
 
 export default UnsplashData;
