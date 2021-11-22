@@ -11,13 +11,15 @@ export const mockImage1 = {
     alt_description: 'pink convertible car',
     urls: {
         full: 'https://images.unsplash.com/photo-1500759285222-a95626b934cb?crop=entropy&cs=srgb&fm=jpg&ixid=MnwyNzUzOTl8MHwxfHNlYXJjaHwyfHxIYXZhbmF8ZW58MHx8fHwxNjM3NjAyMzU1&ixlib=rb-1.2.1&q=85',
-        regular: 'https://images.unsplash.com/photo-1500759285222-a95626b934cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNzUzOTl8MHwxfHNlYXJjaHwyfHxIYXZhbmF8ZW58MHx8fHwxNjM3NjAyMzU1&ixlib=rb-1.2.1&q=80&w=1080',
+        regular:
+            'https://images.unsplash.com/photo-1500759285222-a95626b934cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNzUzOTl8MHwxfHNlYXJjaHwyfHxIYXZhbmF8ZW58MHx8fHwxNjM3NjAyMzU1&ixlib=rb-1.2.1&q=80&w=1080',
     },
     links: {
         self: 'https://api.unsplash.com/photos/uLh71gTmZ4g',
         html: 'https://unsplash.com/photos/uLh71gTmZ4g',
         download: 'https://unsplash.com/photos/uLh71gTmZ4g/download?ixid=MnwyNzUzOTl8MHwxfHNlYXJjaHwyfHxIYXZhbmF8ZW58MHx8fHwxNjM3NjAyMzU1',
-        download_location: 'https://api.unsplash.com/photos/uLh71gTmZ4g/download?ixid=MnwyNzUzOTl8MHwxfHNlYXJjaHwyfHxIYXZhbmF8ZW58MHx8fHwxNjM3NjAyMzU1'
+        download_location:
+            'https://api.unsplash.com/photos/uLh71gTmZ4g/download?ixid=MnwyNzUzOTl8MHwxfHNlYXJjaHwyfHxIYXZhbmF8ZW58MHx8fHwxNjM3NjAyMzU1',
     },
     categories: [],
     likes: 568,
@@ -26,8 +28,8 @@ export const mockImage1 = {
     sponsorship: false,
     topic_submissions: {},
     user: {},
-    tags: []
-}
+    tags: [],
+};
 export const mockImage2 = {
     id: '4MTSE39Oqro',
     created_at: '2019-10-05T14:22:58-04:00',
@@ -41,13 +43,15 @@ export const mockImage2 = {
     alt_description: 'two cars parked outside building',
     urls: {
         full: 'https://images.unsplash.com/photo-1570299437488-d430e1e677c7?crop=entropy&cs=srgb&fm=jpg&ixid=MnwyNzUzOTl8MHwxfHNlYXJjaHwxfHxIYXZhbmF8ZW58MHx8fHwxNjM3NjAyMzU1&ixlib=rb-1.2.1&q=85',
-        regular: 'https://images.unsplash.com/photo-1570299437488-d430e1e677c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNzUzOTl8MHwxfHNlYXJjaHwxfHxIYXZhbmF8ZW58MHx8fHwxNjM3NjAyMzU1&ixlib=rb-1.2.1&q=80&w=1080',
+        regular:
+            'https://images.unsplash.com/photo-1570299437488-d430e1e677c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNzUzOTl8MHwxfHNlYXJjaHwxfHxIYXZhbmF8ZW58MHx8fHwxNjM3NjAyMzU1&ixlib=rb-1.2.1&q=80&w=1080',
     },
     links: {
         self: 'https://api.unsplash.com/photos/4MTSE39Oqro',
         html: 'https://unsplash.com/photos/4MTSE39Oqro',
         download: 'https://unsplash.com/photos/4MTSE39Oqro/download?ixid=MnwyNzUzOTl8MHwxfHNlYXJjaHwxfHxIYXZhbmF8ZW58MHx8fHwxNjM3NjAyMzU1',
-        download_location: 'https://api.unsplash.com/photos/4MTSE39Oqro/download?ixid=MnwyNzUzOTl8MHwxfHNlYXJjaHwxfHxIYXZhbmF8ZW58MHx8fHwxNjM3NjAyMzU1'
+        download_location:
+            'https://api.unsplash.com/photos/4MTSE39Oqro/download?ixid=MnwyNzUzOTl8MHwxfHNlYXJjaHwxfHxIYXZhbmF8ZW58MHx8fHwxNjM3NjAyMzU1',
     },
     categories: [],
     likes: 280,
@@ -56,14 +60,11 @@ export const mockImage2 = {
     sponsorship: false,
     topic_submissions: {},
     user: {},
-    tags: []
-}
+    tags: [],
+};
 
 export const mockImages = {
     total: 2,
     total_pages: 1,
-    results: [
-        mockImage1,
-        mockImage2,
-    ],
+    results: [mockImage1, mockImage2],
 };

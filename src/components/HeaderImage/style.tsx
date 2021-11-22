@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const HeaderImageStyled = styled.div`
     @media (max-width: 440px) {
         min-height: 300px;
-    }   
+    }
     position: relative;
     width: 100%;
     min-height: 400px;

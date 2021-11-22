@@ -8,7 +8,7 @@ type CountryJson = {
     name: {
         common: string;
         official: string;
-        nativeName: {}
+        nativeName: {};
     };
     tld: string[];
     cca2: string;

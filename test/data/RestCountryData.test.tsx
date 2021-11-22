@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import React from 'react'
+import React from 'react';
 import RestCountryData from 'data/RestCountryData';
 import axios from 'axios';
 import Country from 'core/entities/Country';
@@ -21,7 +21,7 @@ const expectedSpain = new Country(
     'https://flagcdn.com/es.svg',
     'https://goo.gl/maps/138JaXW8EZzRVitY9',
     '47.351.567',
-    [ new Language('Spanish') ],
+    [new Language('Spanish')],
     'Madrid'
 );
 
@@ -33,13 +33,13 @@ const expectedIreland = new Country(
     'https://flagcdn.com/ie.svg',
     'https://goo.gl/maps/hxd1BKxgpchStzQC6',
     '4.994.724',
-    [ new Language('English'), new Language('Irish') ],
+    [new Language('English'), new Language('Irish')],
     'Dublin'
 );
 
-afterEach(() => mockedAxios.get.mockClear())
+afterEach(() => mockedAxios.get.mockClear());
 
-describe("RestCountryData.all", () => {
+describe('RestCountryData.all', () => {
     test('should return Ireland and Spain Country entities when API returns 200', async () => {
         mockedAxios.get.mockResolvedValue({ data: mockCountries, status: 200, statusText: 'test' });
         const restCountryData = new RestCountryData();
@@ -47,21 +47,21 @@ describe("RestCountryData.all", () => {
         const resultWithFormat = restCountryDataResult.format();
         expect(resultWithFormat).toHaveLength(2);
         expect(resultWithFormat[0]).toEqual(expectedSpain);
-        expect(resultWithFormat[1]).toEqual(expectedIreland)
+        expect(resultWithFormat[1]).toEqual(expectedIreland);
         expect(restCountryDataResult.isSuccess()).toBeTruthy();
     });
 
     test('should return error when API returns 404', async () => {
-        mockedAxios.get.mockRejectedValue({ response: { status: 404, statusText: 'test' }});
+        mockedAxios.get.mockRejectedValue({ response: { status: 404, statusText: 'test' } });
         const restCountryData = new RestCountryData();
         const restCountryDataResult = await restCountryData.all();
         expect(restCountryDataResult.isError()).toBeTruthy();
     });
 });
 
-describe("RestCountryData.getByCode", () => {
+describe('RestCountryData.getByCode', () => {
     test('should return Spain Country entity when API returns 200', async () => {
-        mockedAxios.get.mockResolvedValue({ data: [ mockCountries[0] ], status: 200, statusText: 'test' });
+        mockedAxios.get.mockResolvedValue({ data: [mockCountries[0]], status: 200, statusText: 'test' });
         const restCountryData = new RestCountryData();
         const restCountryDataResult = await restCountryData.getByCode('es');
         const resultWithFormat = restCountryDataResult.format();
@@ -69,7 +69,7 @@ describe("RestCountryData.getByCode", () => {
     });
 
     test('should return error when API returns 404', async () => {
-        mockedAxios.get.mockRejectedValue({ response: { status: 404, statusText: 'test' }});
+        mockedAxios.get.mockRejectedValue({ response: { status: 404, statusText: 'test' } });
         const restCountryData = new RestCountryData();
         const restCountryDataResult = await restCountryData.getByCode('es');
         expect(restCountryDataResult.isError()).toBeTruthy();

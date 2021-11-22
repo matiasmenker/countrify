@@ -11,7 +11,6 @@ import HeaderImage from 'components/HeaderImage';
 import Page404 from 'components/Page404';
 import NotFound from 'components/NotFound';
 
-
 const HeaderStyled = styled.div`
     display: flex;
     position: relative;
@@ -26,7 +25,7 @@ const MainStyled = styled.div`
     @media (max-width: 440px) {
         grid-template-columns: 100%;
         padding: 20px;
-    }  
+    }
     width: auto;
     max-width: none;
     float: none;
@@ -43,7 +42,6 @@ const MainStyled = styled.div`
     list-style: none;
 `;
 
-
 const Countries = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
     const [searchValue, setSearchValue] = useState('');
     const hasError = props.error;
@@ -52,7 +50,7 @@ const Countries = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
         ? props.countries.filter((country: Country) => country.name.toLowerCase().includes(searchValue.toLowerCase()))
         : props.countries;
 
-    const handleChange = useCallback((query: string) => setSearchValue(query.toLowerCase()), [])
+    const handleChange = useCallback((query: string) => setSearchValue(query.toLowerCase()), []);
 
     return (
         <>
@@ -63,7 +61,7 @@ const Countries = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
             {hasError ? (
                 <Page404 />
             ) : countries && countries.length > 0 ? (
-                <MainStyled role="list">
+                <MainStyled role='list'>
                     {countries.map((country: Country) => (
                         <CountryItem key={country.code} country={country} />
                     ))}

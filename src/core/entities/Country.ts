@@ -20,7 +20,7 @@ class Country {
         googleMaps: string,
         population: string,
         language: Language[] | null,
-        capital: string | null,
+        capital: string | null
     ) {
         this.name = name;
         this.code = code;

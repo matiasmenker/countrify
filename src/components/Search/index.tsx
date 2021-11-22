@@ -10,7 +10,7 @@ const Search = memo(({ onSearch }: { onSearch: (query: string) => void }) => (
                     <form className='search-input-form'>
                         <BsSearch className='icon fill-current search-icon' />
                         <input
-                            role="search"
+                            role='search'
                             placeholder='Search...'
                             className='search-input'
                             type='search'

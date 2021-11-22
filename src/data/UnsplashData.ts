@@ -34,7 +34,7 @@ export type ImageJson = {
         sponsorship: boolean;
         topic_submissions: {};
         user: {};
-        tags:[];
+        tags: [];
     }[];
 };
 
@@ -50,11 +50,7 @@ class UnsplashData implements ImageRepository {
                 },
             });
             const image = asImage(data);
-            return new HttpResponse<Image>(
-                status,
-                statusText,
-                image
-            );
+            return new HttpResponse<Image>(status, statusText, image);
         } catch (error) {
             const err = error as AxiosError;
             if (err.response) {
@@ -66,6 +62,7 @@ class UnsplashData implements ImageRepository {
     }
 }
 
-export const asImage = (data: ImageJson) => new Image(data.results[0].urls.full, data.results[0].urls.regular, data.results[0].alt_description)
+export const asImage = (data: ImageJson) =>
+    new Image(data.results[0].urls.full, data.results[0].urls.regular, data.results[0].alt_description);
 
 export default UnsplashData;

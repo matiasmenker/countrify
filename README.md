@@ -3,7 +3,7 @@ Demo: https://countrify.vercel.app/
 ## Architecture
 
 <p align="center">
-    <img src="./arch.png" alt="Architecture" width="320">
+    <img src="./countrify.png" alt="Architecture" width="320">
 </p>
 
 ## Local Setup
