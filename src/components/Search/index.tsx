@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import SearchStyled from 'components/Search/style';
 import { BsSearch } from 'react-icons/bs';
 
-const Search = memo((props: { onSearch: (query: string) => void }) => (
+const Search = memo(({ onSearch }: { onSearch: (query: string) => void }) => (
     <SearchStyled>
         <div className='search-input-container'>
             <div className='search-input-with-dropdown'>
@@ -10,10 +10,14 @@ const Search = memo((props: { onSearch: (query: string) => void }) => (
                     <form className='search-input-form'>
                         <BsSearch className='icon fill-current search-icon' />
                         <input
+                            role="search"
                             placeholder='Search...'
                             className='search-input'
-                            type='text'
-                            onChange={(event) => props.onSearch(event.target.value)}
+                            type='search'
+                            onChange={(event) => {
+                                event.preventDefault();
+                                onSearch && onSearch(event.target.value);
+                            }}
                         />
                     </form>
                 </div>

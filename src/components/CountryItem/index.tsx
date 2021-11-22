@@ -1,15 +1,15 @@
 import React, { memo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Country from 'core/entities/Country';
 import CountryItemStyled from 'components/CountryItem/style';
-import Link from 'next/link';
 import { BsFillPeopleFill } from 'react-icons/bs';
 
 const CountryItem = memo(({ country }: { country: Country }) => {
     const flag = `https://flagpedia.net/data/flags/w1160/${country.code.toLowerCase()}.png`;
     return (
-        <Link href={`/countries/${country.code}`}>
-            <CountryItemStyled>
+        <Link href={`/country/${country.code.toLowerCase()}`}>
+            <CountryItemStyled role="listitem" data-testid={`country-${country.name.toLocaleLowerCase()}`}>
                 <div className='thumbnail-container-image'>
                     <Image layout={'fill'} placeholder={'blur'} blurDataURL={flag} src={flag} alt={country.name} />
                 </div>

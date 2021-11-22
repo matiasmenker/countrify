@@ -63,7 +63,7 @@ const Countries = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
             {hasError ? (
                 <Page404 />
             ) : countries && countries.length > 0 ? (
-                <MainStyled>
+                <MainStyled role="list">
                     {countries.map((country: Country) => (
                         <CountryItem key={country.code} country={country} />
                     ))}
