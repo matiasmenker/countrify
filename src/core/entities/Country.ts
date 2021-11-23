@@ -8,6 +8,7 @@ class Country {
     readonly flag: string;
     readonly googleMaps: string;
     readonly population: string;
+    readonly currencies: string[] | null;
     readonly language: Language[] | null;
     readonly capital: string | null;
 
@@ -19,6 +20,7 @@ class Country {
         flag: string,
         googleMaps: string,
         population: string,
+        currencies: string[] | null,
         language: Language[] | null,
         capital: string | null
     ) {
@@ -29,6 +31,7 @@ class Country {
         this.flag = flag;
         this.googleMaps = googleMaps;
         this.population = population;
+        this.currencies = currencies;
         this.language = language;
         this.capital = capital;
     }

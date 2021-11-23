@@ -9,7 +9,7 @@ import RestCountryData from 'data/RestCountryData';
 import Country from 'core/entities/Country';
 import Language from 'core/entities/Language';
 import Image from 'core/entities/Image';
-import { BsFillGeoAltFill, BsFillPeopleFill, BsFillMegaphoneFill, BsArrowLeftCircle } from 'react-icons/bs';
+import { BsFillGeoAltFill, BsFillPeopleFill, BsFillMegaphoneFill, BsArrowLeftCircle, BsCurrencyExchange } from 'react-icons/bs';
 import Page404 from 'components/Page404';
 
 const noImageFound = '/default_bg.jpg';
@@ -76,7 +76,7 @@ const CountryDetailStyled = styled.div<{ error: boolean }>`
             span {
                 padding: 0 5px;
             }
-            .population {
+            .currencies {
                 font-size: 13px;
             }
         }
@@ -123,6 +123,16 @@ const CountryDetail = ({ country, image, error }: { country: Country; image: Ima
                                     )}
                                     <img className='flag' src={country.flag} alt={country.name} />
                                 </div>
+                                <div className='sub-detail'>
+                                    <BsFillPeopleFill />
+                                    <span className='population'>{country.population}</span>
+                                </div>
+                                {country.currencies && (
+                                    <div className='sub-detail'>
+                                        <BsCurrencyExchange />
+                                        <span className='currencies'>{country.currencies.join()}</span>
+                                    </div>
+                                )}
                                 {country.language && (
                                     <div className='sub-detail'>
                                         <BsFillMegaphoneFill />
@@ -131,10 +141,6 @@ const CountryDetail = ({ country, image, error }: { country: Country; image: Ima
                                         </span>
                                     </div>
                                 )}
-                                <div className='sub-detail'>
-                                    <BsFillPeopleFill />
-                                    <span className='population'>{country.population}</span>
-                                </div>
                             </>
                         )}
                     </div>

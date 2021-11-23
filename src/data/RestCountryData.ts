@@ -4,6 +4,10 @@ import Language from 'core/entities/Language';
 import axios, { AxiosError } from 'axios';
 import { ErrorResponseType, HttpResponse } from 'core/entities/Response';
 
+type LanguagesJson = {
+    [key: string]: string;
+};
+
 type CountryJson = {
     name: {
         common: string;
@@ -24,9 +28,7 @@ type CountryJson = {
     altSpellings: string[];
     region: string;
     subregion: string;
-    languages: {
-        [key: string]: string;
-    };
+    languages: LanguagesJson;
     translations: {};
     latlng: number[];
     landlocked: boolean;
@@ -96,12 +98,16 @@ export const asCountry = (country: CountryJson) => {
         country.subregion,
         country.flags.svg,
         country.maps.googleMaps,
-        formatPopulation(country.population),
-        country.languages ? Object.values(country.languages).map((language: string) => new Language(language)) : null,
-        country.capital ? country.capital[0] : null
+        mapPopulation(country.population),
+        mapCurrencies(country.currencies),
+        mapLanguages(country.languages),
+        mapCapital(country.capital)
     );
 };
 
-const formatPopulation = (number: number) => number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+const mapPopulation = (number: number) => number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+const mapCurrencies = (currencies: {}) => currencies ? Object.keys(currencies) : null;
+const mapLanguages = (languages: LanguagesJson) => languages ? Object.values(languages).map((language: string) => new Language(language)) : null;
+const mapCapital = (capital: string[]) => capital ? capital[0] : null;
 
 export default RestCountryData;
