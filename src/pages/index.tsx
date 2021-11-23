@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { InferGetStaticPropsType } from 'next';
 import styled from 'styled-components';
 import Country from 'core/entities/Country';
@@ -44,11 +44,12 @@ const MainStyled = styled.div`
 
 const Countries = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
     const [searchValue, setSearchValue] = useState('');
+    const [countries, setCountries] = useState(props.countries);
     const hasError = props.error;
 
-    const countries = searchValue
-        ? props.countries.filter((country: Country) => country.name.toLowerCase().includes(searchValue.toLowerCase()))
-        : props.countries;
+    useEffect(() => {
+        setCountries(props.countries.filter((country: Country) => country.name.toLowerCase().includes(searchValue.toLowerCase())))
+    }, [searchValue])
 
     const handleChange = useCallback((query: string) => setSearchValue(query.toLowerCase()), []);
 
