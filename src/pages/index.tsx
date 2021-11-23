@@ -42,22 +42,30 @@ const MainStyled = styled.div`
     list-style: none;
 `;
 
-const Countries = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
+const useCountries = (initialCountries: Country[]) => {
     const [searchValue, setSearchValue] = useState('');
-    const [countries, setCountries] = useState(props.countries);
-    const hasError = props.error;
+    const [countries, setCountries] = useState(initialCountries);
 
     useEffect(() => {
-        setCountries(props.countries.filter((country: Country) => country.name.toLowerCase().includes(searchValue.toLowerCase())))
-    }, [searchValue])
+        setCountries(initialCountries.filter((country: Country) => country.name.toLowerCase().includes(searchValue.toLowerCase())))
+    }, [searchValue]);
 
     const handleChange = useCallback((query: string) => setSearchValue(query.toLowerCase()), []);
 
+    return {
+        countries,
+        search: handleChange
+    }
+}
+
+const Countries = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
+    const { countries, search } = useCountries(props.countries);
+    const hasError = props.error;
     return (
         <>
             <HeaderStyled>
                 <HeaderImage />
-                <Search onSearch={handleChange} />
+                <Search onSearch={search} />
             </HeaderStyled>
             {hasError ? (
                 <Page404 />
