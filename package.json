@@ -6,7 +6,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "test": "jest --runInBand --no-cache && cp coverage/clover.xml ./coverage.xml"
+        "test": "jest"
     },
     "dependencies": {
         "@types/axios": "^0.14.0",
@@ -29,9 +29,6 @@
         "eslint-config-next": "12.0.3",
         "identity-obj-proxy": "^3.0.0",
         "jest": "^27.3.1",
-        "jest-fetch-mock": "^3.0.3",
-        "jest-mock-axios": "^4.4.1",
-        "react-test-renderer": "^17.0.2",
         "typescript": "4.4.4"
     }
 }
