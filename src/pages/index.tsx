@@ -60,24 +60,23 @@ const useCountries = (initialCountries: Country[]) => {
 
 const Countries = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
     const { countries, search } = useCountries(props.countries);
-    const hasError = props.error;
+    const hasCountries = countries && countries.length > 0;
+    const hasError = props.error && !hasCountries;
     return (
         <>
             <HeaderStyled>
                 <HeaderImage />
                 <Search onSearch={search} />
             </HeaderStyled>
-            {hasError ? (
-                <Page404 />
-            ) : countries && countries.length > 0 ? (
+            { hasError && <Page404 />}
+            { hasCountries ?
                 <MainStyled role='list'>
                     {countries.map((country: Country) => (
                         <CountryItem key={country.code} country={country} />
                     ))}
-                </MainStyled>
-            ) : (
+                </MainStyled> :
                 <NotFound />
-            )}
+            }
         </>
     );
 };
