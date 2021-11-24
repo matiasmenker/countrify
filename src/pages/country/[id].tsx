@@ -35,7 +35,7 @@ const CountryDetailStyled = styled.div<{ error: boolean }>`
         width: 100%;
         height: 100%;
         position: absolute;
-        
+
         .back {
             color: white;
             font-size: 25px;
@@ -45,7 +45,7 @@ const CountryDetailStyled = styled.div<{ error: boolean }>`
             padding: 0 30px;
             align-items: center;
         }
-    
+
         .detail {
             display: flex;
             flex-direction: column;
@@ -80,8 +80,8 @@ const CountryDetailStyled = styled.div<{ error: boolean }>`
                 padding: 0 5px;
             }
         }
-        
-         .borders{
+
+        .borders {
             height: 20%;
             width: 100%;
             display: flex;
@@ -89,7 +89,7 @@ const CountryDetailStyled = styled.div<{ error: boolean }>`
             align-content: center;
             justify-content: center;
             flex-direction: column;
-            .title{
+            .title {
                 width: 100%;
                 color: white;
                 text-align: center;
@@ -97,13 +97,12 @@ const CountryDetailStyled = styled.div<{ error: boolean }>`
                 font-weight: 100;
                 margin-bottom: 10px;
             }
-            .container{      
+            .container {
                 width: 100%;
-                display: inline-flex;    
-       align-items: center;
-            align-content: center;
-            justify-content: center;
-          
+                display: inline-flex;
+                align-items: center;
+                align-content: center;
+                justify-content: center;
             }
         }
     }
@@ -172,10 +171,12 @@ const CountryDetail = ({ country, image, error }: { country: Country; image: Ima
                         )}
                     </div>
                     {country.borders && (
-                        <div className="borders">
-                            <h3 className="title">Bordering countries:</h3>
-                            <div className="container">
-                                { country.borders.map((codeCountry: string) => <CountryBorder key={codeCountry} code={codeCountry} />)}
+                        <div className='borders'>
+                            <h3 className='title'>Bordering countries:</h3>
+                            <div className='container'>
+                                {country.borders.map((codeCountry: string) => (
+                                    <CountryBorder key={codeCountry} code={codeCountry} />
+                                ))}
                             </div>
                         </div>
                     )}

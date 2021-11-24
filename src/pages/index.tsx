@@ -47,16 +47,16 @@ const useCountries = (initialCountries: Country[]) => {
     const [countries, setCountries] = useState(initialCountries);
 
     useEffect(() => {
-        setCountries(initialCountries.filter((country: Country) => country.name.toLowerCase().includes(searchValue.toLowerCase())))
+        setCountries(initialCountries.filter((country: Country) => country.name.toLowerCase().includes(searchValue.toLowerCase())));
     }, [searchValue]);
 
     const handleChange = useCallback((query: string) => setSearchValue(query.toLowerCase()), []);
 
     return {
         countries,
-        search: handleChange
-    }
-}
+        search: handleChange,
+    };
+};
 
 const Countries = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
     const { countries, search } = useCountries(props.countries);
@@ -68,15 +68,16 @@ const Countries = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
                 <HeaderImage />
                 <Search onSearch={search} />
             </HeaderStyled>
-            { hasError && <Page404 />}
-            { hasCountries ?
+            {hasError && <Page404 />}
+            {hasCountries ? (
                 <MainStyled role='list'>
                     {countries.map((country: Country) => (
                         <CountryItem key={country.code} country={country} />
                     ))}
-                </MainStyled> :
+                </MainStyled>
+            ) : (
                 <NotFound />
-            }
+            )}
         </>
     );
 };
