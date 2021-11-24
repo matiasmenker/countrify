@@ -11,6 +11,7 @@ import Language from 'core/entities/Language';
 import Image from 'core/entities/Image';
 import { BsFillGeoAltFill, BsFillPeopleFill, BsFillMegaphoneFill, BsArrowLeftCircle, BsCurrencyExchange } from 'react-icons/bs';
 import Page404 from 'components/Page404';
+import CountryBorder from 'components/CountryBorder';
 
 const noImageFound = '/default_bg.jpg';
 
@@ -30,25 +31,27 @@ const CountryDetailStyled = styled.div<{ error: boolean }>`
         filter: brightness(0.5) !important;
     }
 
-    .back {
-        color: white;
-        left: 30px;
-        top: 30px;
-        font-size: 25px;
-        position: absolute;
-        cursor: pointer;
-    }
-
     .detail-container {
         width: 100%;
         height: 100%;
         position: absolute;
+        
+        .back {
+            color: white;
+            font-size: 25px;
+            height: 10%;
+            cursor: pointer;
+            display: flex;
+            padding: 0 30px;
+            align-items: center;
+        }
+    
         .detail {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100%;
+            height: 70%;
 
             span {
                 color: white;
@@ -76,8 +79,31 @@ const CountryDetailStyled = styled.div<{ error: boolean }>`
             span {
                 padding: 0 5px;
             }
-            .currencies {
+        }
+        
+         .borders{
+            height: 20%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            flex-direction: column;
+            .title{
+                width: 100%;
+                color: white;
+                text-align: center;
                 font-size: 13px;
+                font-weight: 100;
+                margin-bottom: 10px;
+            }
+            .container{      
+                width: 100%;
+                display: inline-flex;    
+       align-items: center;
+            align-content: center;
+            justify-content: center;
+          
             }
         }
     }
@@ -85,9 +111,10 @@ const CountryDetailStyled = styled.div<{ error: boolean }>`
 
 const CountryDetail = ({ country, image, error }: { country: Country; image: Image; error: boolean }) => {
     const router = useRouter();
+
     if (country) {
         return (
-            <CountryDetailStyled error>
+            <CountryDetailStyled error={error}>
                 {!error && (
                     <NextImage
                         data-testid='image-country'
@@ -144,6 +171,14 @@ const CountryDetail = ({ country, image, error }: { country: Country; image: Ima
                             </>
                         )}
                     </div>
+                    {country.borders && (
+                        <div className="borders">
+                            <h3 className="title">Bordering countries:</h3>
+                            <div className="container">
+                                { country.borders.map((codeCountry: string) => <CountryBorder key={codeCountry} code={codeCountry} />)}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </CountryDetailStyled>
         );
@@ -163,7 +198,7 @@ export const getStaticProps = async (props: { params: { id: string } }) => {
     return {
         props: {
             image: image.isSuccess() ? image.format() : null,
-            country: country.isSuccess() ? country.format() : [],
+            country: country.isSuccess() ? country.format() : null,
             error: country.isError(),
         },
     };

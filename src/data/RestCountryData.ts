@@ -96,9 +96,10 @@ export const asCountry = (country: CountryJson) => {
         country.cca2,
         country.region,
         country.subregion,
-        country.flags.svg,
+        mapFlag(country.cca2),
         country.maps.googleMaps,
         mapPopulation(country.population),
+        mapBorders(country.borders),
         mapCurrencies(country.currencies),
         mapLanguages(country.languages),
         mapCapital(country.capital)
@@ -106,8 +107,10 @@ export const asCountry = (country: CountryJson) => {
 };
 
 const mapPopulation = (number: number) => number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+const mapBorders = (borders: string[]) => borders ? borders : null;
 const mapCurrencies = (currencies: {}) => currencies ? Object.keys(currencies) : null;
 const mapLanguages = (languages: LanguagesJson) => languages ? Object.values(languages).map((language: string) => new Language(language)) : null;
 const mapCapital = (capital: string[]) => capital ? capital[0] : null;
+const mapFlag = (code: string) => `https://flagcdn.com/w1280/${code.toLowerCase()}.png`;
 
 export default RestCountryData;

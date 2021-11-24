@@ -3,7 +3,7 @@ module.exports = {
     swcMinify: true,
     reactStrictMode: true,
     images: {
-        domains: ['flagpedia.net', 'unsplash.com', 'images.unsplash.com'],
+        domains: ['flagcdn.com', 'unsplash.com', 'images.unsplash.com'],
     },
     experimental: {
         styledComponents: true,
