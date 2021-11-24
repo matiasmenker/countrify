@@ -39,11 +39,11 @@ const CountryDetailStyled = styled.div<{ error: boolean }>`
         .back {
             color: white;
             font-size: 25px;
-            height: 10%;
             cursor: pointer;
-            display: flex;
-            padding: 0 30px;
             align-items: center;
+            position: absolute;
+            top: 30px;
+            left: 30px;
         }
 
         .detail {
@@ -51,13 +51,16 @@ const CountryDetailStyled = styled.div<{ error: boolean }>`
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 70%;
+            height: 80%;
 
             span {
                 color: white;
                 width: 100%;
             }
             .name {
+                @media (max-width: 350px) {
+                  font-size: 40px;
+                }
                 margin-bottom: 10px;
                 font-size: 80px;
                 font-weight: bolder;
